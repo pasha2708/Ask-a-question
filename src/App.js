@@ -44,7 +44,7 @@ const App = () => {
         message: data,
       })
       .then(() => {
-        NotificationManager.success('Запитання надіслано, дякуємо');
+        NotificationManager.success('Відгук надіслано, дякуємо');
         setData('');
         setLoading(false)
       })
@@ -58,12 +58,12 @@ const App = () => {
     <>
       <Header>
         <Container>
-          <HeaderText>Ask a question</HeaderText>
+          <HeaderText>Дитячий табір</HeaderText>
         </Container>
       </Header>
       <Container>
         <textarea
-          placeholder='Введіть ваше запитання(анонімно)'
+          placeholder='Введіть ваш відгук(анонімно)'
           onChange={(e) => setData(e.target.value)}
           value={data}
         />
