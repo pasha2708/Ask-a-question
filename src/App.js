@@ -8,6 +8,9 @@ import {
   NotificationManager,
 } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
+import QuestionForm from './components/QuestionForm';
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+import Manage from './components/Manage';
 
 const Header = styled.div`
   background-color: #e16f3b;
@@ -22,7 +25,7 @@ const HeaderText = styled.p`
   padding-top: 10px;
 `;
 
-const Container = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,26 +36,6 @@ const Container = styled.div`
 `;
 
 const App = () => {
-  const [data, setData] = useState('');
-  const [loading, setLoading] = useState(false)
-
-  const handleClick = () => {
-    setLoading(true)
-    axios
-      .post('https://61b7874164e4a10017d18b87.mockapi.io/questions', {
-        date: new Date(),
-        message: data,
-      })
-      .then(() => {
-        NotificationManager.success('Запитання надіслано, дякуємо');
-        setData('');
-        setLoading(false)
-      })
-      .catch(() => {
-        NotificationManager.error('Помилка. Спробуйте пізніше');
-        setLoading(false)
-      });
-  };
 
   return (
     <>
@@ -61,22 +44,10 @@ const App = () => {
           <HeaderText>Ask a question</HeaderText>
         </Container>
       </Header>
-      <Container>
-        <textarea
-          placeholder='Введіть ваше запитання(анонімно)'
-          onChange={(e) => setData(e.target.value)}
-          value={data}
-        />
-        <Button
-          style={{ backgroundColor: '#e16f3b' }}
-          variant='contained'
-          onClick={handleClick}
-          disabled={!data || loading}
-        >
-          Надіслати
-        </Button>
-        <NotificationContainer />
-      </Container>
+      <Routes>
+        <Route exact path="/" element={<QuestionForm />} />
+        <Route exact path="manage" element={<Manage />} />
+      </Routes>
     </>
   );
 };
