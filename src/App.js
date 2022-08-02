@@ -41,7 +41,7 @@ const App = () => {
     axios
       .post('https://asqaquestion.herokuapp.com/questions', {
         date: new Date(),
-        message: `Відгук табір: ${data}`,
+        text: `Відгук табір: ${data}`,
       })
       .then(() => {
         NotificationManager.success('Відгук надіслано, дякуємо');
