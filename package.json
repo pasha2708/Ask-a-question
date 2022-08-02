@@ -21,8 +21,9 @@
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
-		"predeploy": "npm run build",
-		"deploy": "gh-pages -d build"
+		"test": "jest",
+		"test:ci": "react-scripts test --testResultsProcessor ./node_modules/jest-junit",
+		"eject": "react-scripts eject"
 	},
 	"eslintConfig": {
 		"extends": [
