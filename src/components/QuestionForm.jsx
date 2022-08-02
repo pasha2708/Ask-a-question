@@ -15,9 +15,9 @@ const QuestionForm = () => {
 	const handleClick = () => {
 		setLoading(true);
 		axios
-			.post('https://61b7874164e4a10017d18b87.mockapi.io/questions', {
+			.post('https://asqaquestion.herokuapp.com/questions', {
 				date: new Date(),
-				message: data,
+				text: data,
 			})
 			.then(() => {
 				NotificationManager.success('Запитання надіслано, дякуємо');
