@@ -1,29 +1,11 @@
 import axios from 'axios';
 import React from 'react';
-import { Container } from '../App';
 import md5 from 'md5';
 import { Button } from '@mui/material';
-import styled from 'styled-components';
+import moment from 'moment';
 
-const StyledInput = styled.input`
-	font-size: 20px;
-	margin-top: 50px;
-	margin-bottom: 20px;
-`;
-
-const Question = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background-color: white;
-	margin-bottom: 20px;
-	span {
-		margin-bottom: 10px;
-	}
-	button {
-		width: 150px;
-	}
-`;
+import { Container } from '../../App';
+import { StyledInput, StyledQuestion } from './Manage.styles';
 
 const Manage = () => {
 	const [logged, setLogged] = React.useState(false);
@@ -37,7 +19,6 @@ const Manage = () => {
 			.split('; ')
 			.find((row) => row.startsWith('token='))
 			?.split('=')[1];
-		console.log(token);
 		if (token) {
 			setLogged(true);
 			setToken(token);
@@ -45,7 +26,7 @@ const Manage = () => {
 		if (logged) {
 			fetchData();
 		}
-	}, [logged]);
+	}, [logged, fetchData]);
 	const fetchData = () => {
 		axios
 			.get('https://asqaquestion.herokuapp.com/questions', {
@@ -55,7 +36,7 @@ const Manage = () => {
 				setQuestions(data);
 				setLoading(false);
 			})
-			.catch((e) => console.log(e));
+			.catch((e) => console.error(e));
 	};
 
 	const getToken = () => {
@@ -100,10 +81,13 @@ const Manage = () => {
 			{questions.length === 0 && logged && !loading && (
 				<h1>Питань немає</h1>
 			)}
+			{logged && loading && <h1>Завантажується...</h1>}
 			{logged &&
 				questions?.map((item) => (
-					<Question>
-						<span>Дата: {item.date}</span>
+					<StyledQuestion>
+						<span>
+							Дата: {moment(item.date).format('d.MM.YYYY HH:MM')}
+						</span>
 						<span>{item.text}</span>
 						<Button
 							style={{ backgroundColor: '#e16f3b' }}
@@ -112,7 +96,7 @@ const Manage = () => {
 						>
 							Видалити
 						</Button>
-					</Question>
+					</StyledQuestion>
 				))}
 		</Container>
 	);

@@ -1,16 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import './index.css';
-import Button from '@mui/material/Button';
-import axios from 'axios';
-import {
-  NotificationContainer,
-  NotificationManager,
-} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import QuestionForm from './components/QuestionForm';
-import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
-import Manage from './components/Manage';
+import { Route, Routes } from "react-router-dom";
+import Manage from './components/Manage/Manage';
 
 const Header = styled.div`
   background-color: #e16f3b;
