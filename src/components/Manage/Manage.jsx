@@ -14,6 +14,18 @@ const Manage = () => {
 	const [questions, setQuestions] = React.useState([]);
 	const [loading, setLoading] = React.useState(true);
 
+	const fetchData = () => {
+		axios
+			.get('https://asqaquestion.herokuapp.com/questions', {
+				headers: { Authorization: token },
+			})
+			.then(({ data }) => {
+				setQuestions(data);
+				setLoading(false);
+			})
+			.catch((e) => console.error(e));
+	};
+
 	React.useEffect(() => {
 		const token = document.cookie
 			.split('; ')
@@ -27,17 +39,6 @@ const Manage = () => {
 			fetchData();
 		}
 	}, [logged, fetchData]);
-	const fetchData = () => {
-		axios
-			.get('https://asqaquestion.herokuapp.com/questions', {
-				headers: { Authorization: token },
-			})
-			.then(({ data }) => {
-				setQuestions(data);
-				setLoading(false);
-			})
-			.catch((e) => console.error(e));
-	};
 
 	const getToken = () => {
 		axios
@@ -86,7 +87,7 @@ const Manage = () => {
 				questions?.map((item) => (
 					<StyledQuestion>
 						<span>
-							Дата: {moment(item.date).format('d.MM.YYYY HH:MM')}
+							Дата: {moment(item.date).format('d.MM.YYYY HH:mm')}
 						</span>
 						<span>{item.text}</span>
 						<Button
