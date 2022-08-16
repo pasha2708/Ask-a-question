@@ -41,7 +41,7 @@ const App = () => {
     axios
       .post('https://asqaquestion.herokuapp.com/questions', {
         date: new Date(),
-        text: `Відгук табір: ${data}`,
+        text: `Юнацький табір: ${data}`,
       })
       .then(() => {
         NotificationManager.success('Відгук надіслано, дякуємо');
@@ -58,7 +58,7 @@ const App = () => {
     <>
       <Header>
         <Container>
-          <HeaderText>Дитячий табір</HeaderText>
+          <HeaderText>Юнацький табір "Пілигрим"</HeaderText>
         </Container>
       </Header>
       <Container>
