@@ -75,7 +75,7 @@ const App = () => {
         >
           Надіслати
         </Button>
-        {!loading && <p>Зачекайте, відгук відправляється...</p>}
+        {loading && <p>Зачекайте, відгук відправляється...</p>}
         <NotificationContainer />
       </Container>
     </>
