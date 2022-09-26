@@ -87,7 +87,7 @@ const Manage = () => {
 				questions?.map((item) => (
 					<StyledQuestion>
 						<span>
-							Дата: {moment(item.date).format('dd.MM.YYYY HH:mm')}
+							Дата: {moment(item.date).format('DD.MM.YYYY HH:mm')}
 						</span>
 						<span>{item.text}</span>
 						<Button
