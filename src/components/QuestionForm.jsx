@@ -15,7 +15,7 @@ const QuestionForm = () => {
 	const handleClick = () => {
 		setLoading(true);
 		axios
-			.post('https://asqaquestion.herokuapp.com/questions', {
+			.post('https://asqaque-be.onrender.com/questions', {
 				date: new Date(),
 				text: data,
 			})

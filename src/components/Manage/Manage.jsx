@@ -16,7 +16,7 @@ const Manage = () => {
 
 	const fetchData = () => {
 		axios
-			.get('https://asqaquestion.herokuapp.com/questions', {
+			.get('https://asqaque-be.onrender.com/questions', {
 				headers: { Authorization: token },
 			})
 			.then(({ data }) => {
@@ -42,7 +42,7 @@ const Manage = () => {
 
 	const getToken = () => {
 		axios
-			.post('https://asqaquestion.herokuapp.com/auth', {
+			.post('https://asqaque-be.onrender.com/auth', {
 				password: md5(inputValue),
 			})
 			.then(() => {
@@ -56,7 +56,7 @@ const Manage = () => {
 	const deleteQuestion = (id) => {
 		if (window.confirm('Видалити питання?')) {
 			axios
-				.delete(`https://asqaquestion.herokuapp.com/questions/${id}`, {
+				.delete(`https://asqaque-be.onrender.com/questions/${id}`, {
 					headers: { Authorization: token },
 				})
 				.then(({ data }) => setQuestions(data));
