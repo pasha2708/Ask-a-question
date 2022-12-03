@@ -27,7 +27,8 @@ const Manage = () => {
 	};
 
 	React.useEffect(() => {
-		const tokenCookie = document.cookie
+		if (!token) {
+			const tokenCookie = document.cookie
 			.split('; ')
 			.find((row) => row.startsWith('token='))
 			?.split('=')[1];
@@ -36,6 +37,8 @@ const Manage = () => {
 			setToken(tokenCookie);
 			fetchData()
 		}
+		}
+		
 	}, [logged, fetchData]);
 
 	const getToken = () => {
