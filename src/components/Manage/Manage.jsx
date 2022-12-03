@@ -35,7 +35,7 @@ const Manage = () => {
 			setLogged(true);
 			setToken(token);
 		}
-		if (logged) {
+		if (logged && !questions) {
 			fetchData();
 		}
 	}, [logged, fetchData]);
