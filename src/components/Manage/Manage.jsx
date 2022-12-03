@@ -16,7 +16,7 @@ const Manage = () => {
 
 	const fetchData = () => {
 		axios
-			.get('https://asqaque-be.onrender.com/questions', {
+			.get('https://asq-a-question-be.vercel.app/questions', {
 				headers: { Authorization: token },
 			})
 			.then(({ data }) => {
@@ -42,7 +42,7 @@ const Manage = () => {
 
 	const getToken = () => {
 		axios
-			.post('https://asqaque-be.onrender.com/auth', {
+			.post('https://asq-a-question-be.vercel.app/auth', {
 				password: md5(inputValue),
 			})
 			.then(() => {
@@ -56,7 +56,7 @@ const Manage = () => {
 	const deleteQuestion = (id) => {
 		if (window.confirm('Видалити питання?')) {
 			axios
-				.delete(`https://asqaque-be.onrender.com/questions/${id}`, {
+				.delete(`https://asq-a-question-be.vercel.app/questions/${id}`, {
 					headers: { Authorization: token },
 				})
 				.then(({ data }) => setQuestions(data));

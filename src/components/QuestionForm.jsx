@@ -15,7 +15,7 @@ const QuestionForm = () => {
 	const handleClick = () => {
 		setLoading(true);
 		axios
-			.post('https://asqaque-be.onrender.com/questions', {
+			.post('https://asq-a-question-be.vercel.app/questions', {
 				date: new Date(),
 				text: data,
 			})
