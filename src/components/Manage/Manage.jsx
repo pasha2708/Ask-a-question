@@ -27,16 +27,14 @@ const Manage = () => {
 	};
 
 	React.useEffect(() => {
-		const token = document.cookie
+		const tokenCookie = document.cookie
 			.split('; ')
 			.find((row) => row.startsWith('token='))
 			?.split('=')[1];
-		if (token) {
+		if (tokenCookie) {
 			setLogged(true);
-			setToken(token);
-		}
-		if (logged && !questions) {
-			fetchData();
+			setToken(tokenCookie);
+			fetchData()
 		}
 	}, [logged, fetchData]);
 
@@ -49,6 +47,7 @@ const Manage = () => {
 				setLogged(true);
 				setToken(md5(inputValue));
 				document.cookie = `token=${md5(inputValue)}`;
+				fetchData();
 			})
 			.catch(() => alert('Невірний пароль'));
 	};
