@@ -18,6 +18,7 @@ const QuestionForm = () => {
 			.post('https://asq-a-question-be.vercel.app/questions', {
 				date: new Date(),
 				text: data,
+				topic: 'Запитання служителю'
 			})
 			.then(() => {
 				NotificationManager.success('Запитання надіслано, дякуємо');
