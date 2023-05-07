@@ -5,6 +5,8 @@ import 'react-notifications/lib/notifications.css';
 import QuestionForm from './components/QuestionForm';
 import { Route, Routes } from "react-router-dom";
 import Manage from './components/Manage/Manage';
+import ManageOptions from './components/Manage/ManageOptions';
+import ListOfQuestions from './components/Manage/ListOfQuestions';
 
 const Header = styled.div`
   background-color: #e16f3b;
@@ -41,6 +43,9 @@ const App = () => {
       <Routes>
         <Route exact path="/" element={<QuestionForm />} />
         <Route exact path="manage" element={<Manage />} />
+        <Route exact path="manage/options" element={<ManageOptions />} />
+        <Route exact path="manage/questions" element={<ListOfQuestions />} />
+
       </Routes>
     </>
   );

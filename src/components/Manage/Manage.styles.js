@@ -1,10 +1,18 @@
 import styled from 'styled-components';
+import { TextField } from '@mui/material';
 
 export const StyledInput = styled.input`
 	font-size: 20px;
 	margin-top: 50px;
 	margin-bottom: 20px;
 `;
+
+export const StyledTextArea = styled.textarea`
+	font-size: 20px;
+	margin-top: 50px;
+	margin-bottom: 20px;
+`;
+
 
 export const StyledQuestion = styled.div`
 	display: flex;

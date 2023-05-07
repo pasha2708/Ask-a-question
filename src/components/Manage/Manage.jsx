@@ -2,30 +2,16 @@ import axios from 'axios';
 import React from 'react';
 import md5 from 'md5';
 import { Button } from '@mui/material';
-import moment from 'moment';
 
 import { Container } from '../../App';
-import { StyledInput, StyledQuestion } from './Manage.styles';
+import { StyledInput } from './Manage.styles';
+import { useNavigate } from 'react-router-dom';
 
 const Manage = () => {
   const [logged, setLogged] = React.useState(false);
   const [inputValue, setInputValue] = React.useState('');
   const [token, setToken] = React.useState('');
-  const [questions, setQuestions] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
-
-  const fetchData = () => {
-    token &&
-      axios
-        .get('https://asq-a-question-be.vercel.app/questions', {
-          headers: { Authorization: token },
-        })
-        .then(({ data }) => {
-          setQuestions(data);
-          setLoading(false);
-        })
-        .catch((e) => console.error(e));
-  };
+  const navigate = useNavigate()
 
   React.useEffect(() => {
       const tokenCookie = document.cookie
@@ -35,9 +21,8 @@ const Manage = () => {
       if (tokenCookie) {
         setLogged(true);
         setToken(tokenCookie);
-        !questions.length && fetchData();
       }
-  }, [fetchData]);
+  }, []);
 
   const getToken = () => {
     axios
@@ -48,23 +33,13 @@ const Manage = () => {
         setLogged(true);
         setToken(md5(inputValue));
         document.cookie = `token=${md5(inputValue)}`;
-        !questions.length && fetchData();
       })
       .catch(() => alert('Невірний пароль'));
   };
 
-  const deleteQuestion = (id) => {
-    if (window.confirm('Видалити питання?')) {
-      axios
-        .delete(`https://asq-a-question-be.vercel.app/questions/${id}`, {
-          headers: { Authorization: token },
-        })
-        .then(({ data }) => setQuestions(data));
-    }
-  };
   return (
     <Container>
-      {!logged && (
+      {!logged ? (
         <>
           <StyledInput
             value={inputValue}
@@ -78,23 +53,23 @@ const Manage = () => {
             Вхід
           </Button>
         </>
-      )}
-      {questions.length === 0 && logged && !loading && <h1>Питань немає</h1>}
-      {logged && loading && <h1>Завантажується...</h1>}
-      {logged &&
-        questions?.map((item) => (
-          <StyledQuestion>
-            <span>Дата: {moment(item.date).format('DD.MM.YYYY HH:mm')}</span>
-            <span>{item.text}</span>
+      ) : <>
             <Button
-              style={{ backgroundColor: '#e16f3b' }}
-              variant='contained'
-              onClick={() => deleteQuestion(item._id)}
-            >
-              Видалити
-            </Button>
-          </StyledQuestion>
-        ))}
+            style={{ backgroundColor: '#e16f3b', margin: 10 }}
+            variant='contained'
+            onClick={() => navigate('questions', {state: {token}})}
+          >
+            Запитання та відгуки
+          </Button>
+          <Button
+            style={{ backgroundColor: '#e16f3b',  margin: 10 }}
+            variant='contained'
+            onClick={() => navigate('options', {state: {token}})}
+          >
+            Налаштування
+          </Button>
+      </>}
+      
     </Container>
   );
 };
