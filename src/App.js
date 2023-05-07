@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import './index.css';
 import Button from '@mui/material/Button';
@@ -35,13 +35,23 @@ const Container = styled.div`
 const App = () => {
   const [data, setData] = useState('');
   const [loading, setLoading] = useState(false)
+  const [loadingHeader, setLoadingHeader] = useState(false)
+  const [headerText, setHeaderText] = useState('')
+
+  useEffect(() => {
+axios.get('https://asq-a-question-be.vercel.app/topic').then(({data}) => {
+  console.log('topic', data.topic)
+  setHeaderText(data.topic)
+})
+  }, [])
 
   const handleClick = () => {
     setLoading(true)
     axios
-      .post('https://asqaquestion.herokuapp.com/questions', {
+      .post('https://asq-a-question-be.vercel.app/questions', {
         date: new Date(),
-        text: `Юнацький табір: ${data}`,
+        topic: headerText,
+        text: data,
       })
       .then(() => {
         NotificationManager.success('Відгук надіслано, дякуємо');
@@ -58,7 +68,7 @@ const App = () => {
     <>
       <Header>
         <Container>
-          <HeaderText>Юнацький табір "Пілигрим"</HeaderText>
+          <HeaderText>{headerText}</HeaderText>
         </Container>
       </Header>
       <Container>
