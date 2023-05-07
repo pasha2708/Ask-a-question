@@ -40,7 +40,6 @@ const App = () => {
 
   useEffect(() => {
 axios.get('https://asq-a-question-be.vercel.app/topic').then(({data}) => {
-  console.log('topic', data.topic)
   setHeaderText(data.topic)
 })
   }, [])
@@ -63,6 +62,10 @@ axios.get('https://asq-a-question-be.vercel.app/topic').then(({data}) => {
         setLoading(false)
       });
   };
+
+  if (!headerText) {
+    return (<h1 style={{textAlign: 'center'}}>Зачекайте...</h1>)
+  }
 
   return (
     <>
