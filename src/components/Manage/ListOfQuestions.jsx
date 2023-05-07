@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
-
+import { Container } from '../../App';
 import { StyledQuestion } from './Manage.styles';
 import { Button } from '@mui/material';
 
@@ -44,23 +44,24 @@ const deleteQuestion = (id) => {
   };
 
 return (
-    <>
+    <Container>
     {questions.length === 0 && !loading && <h1>Питань немає</h1>}
       {loading && <h1>Завантажується...</h1>}
-      {questions?.map((item) => (
+      {questions?.map(({date, topic, text, _id}) => (
           <StyledQuestion>
-            <span>Дата: {moment(item.date).format('DD.MM.YYYY HH:mm')}</span>
-            <span>{item.text}</span>
+            <span><b>Дата:</b> {moment(date).format('DD.MM.YYYY HH:mm')}</span>
+            {topic && <span><b>Тема:</b> {topic}</span>}
+            <span><b>Текст:</b> {text}</span>
             <Button
               style={{ backgroundColor: '#e16f3b' }}
               variant='contained'
-              onClick={() => deleteQuestion(item._id)}
+              onClick={() => deleteQuestion(_id)}
             >
               Видалити
             </Button>
           </StyledQuestion>
         ))}
-        </>
+        </Container>
 )
 }
 
