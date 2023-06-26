@@ -71,10 +71,13 @@ axios.get('https://asq-a-question-be.vercel.app/topic').then(({data}) => {
     <>
       <Header>
         <Container>
-          <HeaderText>{headerText}</HeaderText>
+          <HeaderText>Анонімна анкетка від батьків</HeaderText>
         </Container>
       </Header>
       <Container>
+        <p>1. Що хорошого ти вчишся в тата або мами?
+</p>
+<p>2. Чим можна покращити те як тебе виховують батьки? Що тобі не подобається у відношеннях з татом та мамою? Що ти б хотів змінити?</p>
         <textarea
           placeholder='Введіть ваш відгук(анонімно)'
           onChange={(e) => setData(e.target.value)}
